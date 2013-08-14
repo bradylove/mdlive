@@ -1,14 +1,29 @@
 html, body, .container {
     position: fixed;
     top: 0;
-    left: 0;
+    left: 150px;
     right: 0;
     bottom: 0;
+
     margin-top: 38px;
 }
 
-.pure-menu-open {
-    border-bottom: 1px solid #B7B7B7;
+#side-menu {
+   margin-left: -150px;
+   width: 150px;
+   position: fixed;
+   top: 39px;
+   left: 150px;
+   bottom: 0px;
+   z-index: 1000;
+   border-right: 1px solid #B7B7B7;
+   overflow-y: auto;
+}
+
+
+#side-menu .pure-menu.pure-menu-open {
+    background: none repeat scroll 0% 0% rgb(255, 255, 255);
+    border: none;
 }
 
 .pull-right {
