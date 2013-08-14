@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/stretchr/goweb"
 	"github.com/stretchr/goweb/context"
 	"log"
@@ -36,6 +37,7 @@ func mapRoutes() {
 func main() {
 	mapRoutes()
 
+	fmt.Println(" ")
 	log.Println("MDLive -", Version)
 	log.Println("By Brady Love (http://github.com/bradylove)")
 	log.Println("Starting server on port", Address)

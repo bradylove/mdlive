@@ -8,16 +8,20 @@ html, body, .container {
     margin-top: 38px;
 }
 
+a {
+    cursor: pointer;
+}
+
 #side-menu {
-   margin-left: -150px;
-   width: 150px;
-   position: fixed;
-   top: 39px;
-   left: 150px;
-   bottom: 0px;
-   z-index: 1000;
-   border-right: 1px solid #B7B7B7;
-   overflow-y: auto;
+    margin-left: -150px;
+    width: 150px;
+    position: fixed;
+    top: 39px;
+    left: 150px;
+    bottom: 0px;
+    z-index: 1000;
+    border-right: 1px solid #B7B7B7;
+    overflow-y: auto;
 }
 
 
@@ -38,9 +42,7 @@ html, body, .container {
  	height: 100%;
     width: 100%;
 }
-/* #main div { */
-/* 	overflow: auto; */
-/* } */
+
 .vsplitbar {
 	width: 5px;
 	background: #aaa;
