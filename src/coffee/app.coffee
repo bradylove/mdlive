@@ -1,20 +1,4 @@
-@App = angular.module("App", [])
-
-@App.directive "splitter", ->
-  return (scope, element) ->
-    element.splitter()
-
-    element = element
-    $(window).bind 'resize', (event) ->
-      element.trigger('resize')
-
-@App.directive "editor", ->
-  return (scope, element) ->
-    $(document).ready ->
-      CodeMirror editor,
-        mode: "markdown"
-        lineNumbers: true
-        lineWrapping: true
+@App = angular.module("App", ['ngSanitize'])
 
 @App.factory "Files", ->
   factory =
@@ -30,9 +14,40 @@
 
   return factory
 
-@App.controller "SideBar", ($scope, Files) ->
+@App.factory "Editor", ($rootScope) ->
+  editor  = ace.edit("editor")
+  mode    = ace.require("ace/mode/markdown").Mode
+  session = editor.getSession()
+  value   = ""
+
+  factory =
+    setup: ->
+      editor.setTheme("ace/theme/eclipse")
+
+      session.setMode(new mode())
+      session.setUseWrapMode(true)
+      session.on 'change', (event) ->
+        $rootScope.$apply ->
+          factory.updateValue()
+    getValue: ->
+      value
+    updateValue: ->
+      value = editor.getValue()
+
+  $(document).ready ->
+    factory.setup()
+
+  return factory
+
+@App.controller "SideBarController", ($scope, Files) ->
   $scope.files = Files
 
   $scope.activateFile = ->
     $scope.files.activeFile = @file
     false
+
+@App.controller "EditorController", ($scope, $filter, $sce, Files, Editor) ->
+  $scope.editor = Editor
+  $scope.files  = Files
+  $scope.$watch 'editor.getValue()', (newVal, oldVal) ->
+    $scope.htmlOutput = $sce.trustAsHtml($filter('markdown')(newVal))

@@ -21,7 +21,7 @@
         </div>
       </div>
 
-      <div id="side-menu" class="pure-u" ng-controller="SideBar">
+      <div id="side-menu" class="pure-u" ng-controller="SideBarController">
         <div class="pure-menu pure-menu-open">
           <ul>
             <li ng-repeat="file in files.files">
@@ -31,24 +31,32 @@
         </div>
       </div>
 
-      <div id="main" class="pure-g-r" splitter>
-        <div id="editor" class="pure-u-1-6" editor>
+      <div id="main" class="pure-g-r" splitter ng-controller="EditorController">
+        <div id="editor" class="pure-u-1-6">
         </div>
 
-        <div id="render" class="pure-u-1-6" render>
+        <div id="render" class="pure-u-1-6" ng-bind-html="htmlOutput">
         </div>
       </div>
     </div>
 
     <!-- Libraries -->
+    <script src="/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/ace/theme-eclipse.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/ace/mode-markdown.js" type="text/javascript" charset="utf-8"></script>
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.js"></script>
     <script src="/scripts/splitter.js" type="text/javascript"></script>
-    <script src="/codemirror/lib/codemirror.js" type="text/javascript"></script>
-    <script src="/codemirror/mode/markdown/markdown.js" type="text/javascript"></script>
+    <script src="/scripts/marked.js" type="text/javascript" charset="utf-8"></script>
+
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular.js" type="text/javascript"></script>
+    <script src="//code.angularjs.org/1.2.0rc1/angular-sanitize.js" type="text/javascript"></script>
 
     <!-- App Scripts -->
     <script src="/scripts/app.js" type="text/javascript"></script>
+    <script src="/scripts/filters.js" type="text/javascript"></script>
+    <script src="/scripts/directives.js" type="text/javascript"></script>
+
   </body>
 </html>

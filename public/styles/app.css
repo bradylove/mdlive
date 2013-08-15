@@ -47,3 +47,8 @@ a {
 	width: 5px;
 	background: #aaa;
 }
+
+#render {
+    padding-left: 10px;
+    padding-right: 10px;
+}
