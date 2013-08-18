@@ -20,8 +20,7 @@
       session.setMode(new MarkdownMode())
       session.setUseWrapMode(true)
       session.setUseSoftTabs(true)
-      editor.setShowPrintMargin(false);
-
+      editor.setShowPrintMargin(true);
 
       $(elem).height("100%")
       $(elem).width("100%")
