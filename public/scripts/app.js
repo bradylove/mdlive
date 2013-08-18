@@ -30,36 +30,6 @@
     return factory;
   });
 
-  this.App.factory("Editor", function($rootScope) {
-    var editor, factory, mode, session, value;
-    editor = ace.edit("editor");
-    mode = ace.require("ace/mode/markdown").Mode;
-    session = editor.getSession();
-    value = "";
-    factory = {
-      setup: function() {
-        editor.setTheme("ace/theme/eclipse");
-        session.setMode(new mode());
-        session.setUseWrapMode(true);
-        return session.on('change', function(event) {
-          return $rootScope.$apply(function() {
-            return factory.updateValue();
-          });
-        });
-      },
-      getValue: function() {
-        return value;
-      },
-      updateValue: function() {
-        return value = editor.getValue();
-      }
-    };
-    $(document).ready(function() {
-      return factory.setup();
-    });
-    return factory;
-  });
-
   this.App.controller("SideBarController", function($scope, Files) {
     $scope.files = Files;
     return $scope.activateFile = function() {
@@ -68,10 +38,11 @@
     };
   });
 
-  this.App.controller("EditorController", function($scope, $filter, $sce, Files, Editor) {
-    $scope.editor = Editor;
+  this.App.controller("EditorController", function($scope, $filter, $sce, Files) {
     $scope.files = Files;
-    return $scope.$watch('editor.getValue()', function(newVal, oldVal) {
+    $scope.htmlOutput = "";
+    return $scope.$watch('files.activeFile.body', function(newVal, oldVal) {
+      newVal || (newVal = "");
       return $scope.htmlOutput = $sce.trustAsHtml($filter('markdown')(newVal));
     });
   });

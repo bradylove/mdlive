@@ -14,31 +14,6 @@
 
   return factory
 
-@App.factory "Editor", ($rootScope) ->
-  editor  = ace.edit("editor")
-  mode    = ace.require("ace/mode/markdown").Mode
-  session = editor.getSession()
-  value   = ""
-
-  factory =
-    setup: ->
-      editor.setTheme("ace/theme/eclipse")
-
-      session.setMode(new mode())
-      session.setUseWrapMode(true)
-      session.on 'change', (event) ->
-        $rootScope.$apply ->
-          factory.updateValue()
-    getValue: ->
-      value
-    updateValue: ->
-      value = editor.getValue()
-
-  $(document).ready ->
-    factory.setup()
-
-  return factory
-
 @App.controller "SideBarController", ($scope, Files) ->
   $scope.files = Files
 
@@ -46,8 +21,10 @@
     $scope.files.activeFile = @file
     false
 
-@App.controller "EditorController", ($scope, $filter, $sce, Files, Editor) ->
-  $scope.editor = Editor
+@App.controller "EditorController", ($scope, $filter, $sce, Files) ->
   $scope.files  = Files
-  $scope.$watch 'editor.getValue()', (newVal, oldVal) ->
+  $scope.htmlOutput = ""
+
+  $scope.$watch 'files.activeFile.body', (newVal, oldVal) ->
+    newVal ||= ""
     $scope.htmlOutput = $sce.trustAsHtml($filter('markdown')(newVal))
