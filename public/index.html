@@ -15,7 +15,6 @@
           </ul>
 
           <ul class="pull-right">
-            <li><a>FileOne.md last saved at 1 minute ago</a></li>
           </ul>
         </div>
       </div>
@@ -23,7 +22,7 @@
       <div id="side-menu" class="pure-u" ng-controller="SideBarController">
         <div class="pure-menu pure-menu-open">
           <ul>
-            <li ng-repeat="file in files.files">
+            <li ng-repeat="file in files.files" ng-class="{active: file == files.activeFile }">
               <a ng-click="activateFile()">{{ file.title }}</a>
             </li>
           </ul>

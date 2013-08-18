@@ -5,28 +5,35 @@
     var factory;
     factory = {
       activeFile: null,
-      files: [
-        {
-          title: "FileOne.md",
-          body: "# Hello World, file one"
-        }, {
-          title: "FileTwo.md",
-          body: "# Hello World, file two"
-        }, {
-          title: "FileThree.md",
-          body: "# Hello World, file three"
-        }, {
-          title: "FileFour.md",
-          body: "# Hello World, file four"
-        }, {
-          title: "FileFive.md",
-          body: "# Hello World, file five"
-        }
-      ],
+      files: [],
       getFiles: function() {
         return files;
+      },
+      saveFiles: function() {
+        if (this.files !== {} || this.files !== null) {
+          return localStorage.setItem("files", JSON.stringify(this.files));
+        }
+      },
+      loadFiles: function() {
+        var files;
+        files = JSON.parse(localStorage.getItem("files"));
+        if (files && files.length > 0) {
+          this.files = files;
+        } else {
+          this.files = [
+            {
+              title: "Untitled",
+              body: ""
+            }, {
+              title: "Untitled Two",
+              body: "Hello"
+            }
+          ];
+        }
+        return this.activeFile = this.files[0];
       }
     };
+    factory.loadFiles();
     return factory;
   });
 
@@ -43,7 +50,8 @@
     $scope.htmlOutput = "";
     return $scope.$watch('files.activeFile.body', function(newVal, oldVal) {
       newVal || (newVal = "");
-      return $scope.htmlOutput = $sce.trustAsHtml($filter('markdown')(newVal));
+      $scope.htmlOutput = $sce.trustAsHtml($filter('markdown')(newVal));
+      return $scope.files.saveFiles();
     });
   });
 
