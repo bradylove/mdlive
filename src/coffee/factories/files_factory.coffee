@@ -20,6 +20,12 @@
 
       @activeFile = @files[0]
 
+    newFile: (title) ->
+      console.log "New file added"
+      newFileIndex = @files.push({ title: title, body: "" })
+
+      @activeFile = @files[newFileIndex - 1]
+
   factory.loadFiles()
 
   return factory

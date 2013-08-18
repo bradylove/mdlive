@@ -3,17 +3,19 @@
   <head>
     <title>MDLive Markdown Editor</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.2.1/pure-min.css">
+    <link rel="stylesheet" href="/styles/gumby.css"/>
     <link rel="stylesheet" href="/styles/app.css"/>
   </head>
   <body ng-app="App">
     <div class="container">
-      <div class="header">
+      <div class="header" ng-controller="HeaderController">
         <div id="top-menu" class="pure-menu pure-menu-fixed pure-menu-open pure-menu-horizontal">
           <a class="pure-menu-heading" href="/">MDLive</a>
 
           <ul>
+            <li><a ng-click="addNewFile()"><i class="icon-plus"></i>New File</a></li>
+            <li><a><i class="icon-cancel"></i>Remove File</a></li>
           </ul>
-
           <ul class="pull-right">
           </ul>
         </div>

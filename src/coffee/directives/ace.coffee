@@ -31,7 +31,7 @@
         editor.setValue(ngModel.$viewValue)
 
       editor.on 'change', ->
-        scope.$apply ->
-          value = editor.getValue()
-          ngModel.$setViewValue(value)
+        # scope.$apply ->
+        value = editor.getValue()
+        ngModel.$setViewValue(value)
   }
